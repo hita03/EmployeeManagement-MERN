@@ -1,0 +1,69 @@
+<!-- include header and footer -->
+<%-include('include/_header')%>
+<style>
+  #new-user-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    font-weight: 300;
+    text-align: center;
+    transition: all 0.2s;
+    border-radius: 10px;
+    color: white;
+    background-color: #0069D9;
+  }
+  #new-user-btn:hover {
+    color: black;
+    background-color: #ffffff;
+  }
+</style>
+
+<main id="site-main">
+  <div class="conatiner">
+    <div class="box-nav d-flex justify-between">
+      <a style="padding-left: 50px" href="/add-user" class="border-shadow">
+        <span class="text-dark" id="new-user-btn">New User <i class="fas fa-user"></i></span>
+      </a><br/><br/>
+    </div>
+
+    <form action="/" method="post">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i<users.length; i++){ %>
+            <tr>
+                <td><%= i+1 %></td>
+                <td><%= users[i].ID %></td>
+                <td><%= users[i].name %></td>
+                <td><%= users[i].email %></td>
+                <td><%= users[i].gender %></td>
+                <td><%= users[i].phone %></td>
+                <td>
+                    <a href="/update-user?id=<%= users[i]._id %>" class="btn border-shadow update">
+                    <span class="text-gradient"><i class="fas fa-pencil-alt" style="color: #4CAF50;"></i></span>
+                </a>
+                <a class="btn border-shadow delete" data-id=<%= users[i]._id%> >
+                    <span class="text-gradient"><i class="fas fa-times" style="color: red;"></i></span>
+                </a>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </form>
+
+  </div>
+</main>
+
+
