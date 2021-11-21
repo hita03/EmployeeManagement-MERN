@@ -28,6 +28,11 @@ var emp_schema =new mongoose.Schema({
         required: true
     },
 
+    leave:{
+        type: String,
+        required: true
+
+    }
 })
 
 const Employee = mongoose.model('employee',emp_schema);

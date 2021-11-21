@@ -2,7 +2,7 @@ const axios = require('axios');
 console.log('in services')
 exports.add_user = (req,res)=>{
 
-    res.render('add_user');
+    res.send('routing to create');
 }
 
 exports.update_user = (req,res)=>{

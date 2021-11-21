@@ -19,6 +19,7 @@ class CreateEmployee extends React.Component {
                 email: '',
                 gender: '',
                 phone: 0,
+                leave: 'No',
                 list:[],
         }
     }
@@ -30,82 +31,87 @@ class CreateEmployee extends React.Component {
 
     // To add new employee when user submits the form
     handleSubmit = (event) => {
+        console.log("inside handle submit");
         event.preventDefault();
-        const { ID, name, email,gender, phone } = this.state;
-        axios.post('http://localhost:3000/api/users', {
+        const { ID, name, email,gender, phone,leave } = this.state;
+        console.log(ID, name, email, gender, phone, leave);
+        axios.post('http://localhost:4000/api/users', {
             ID,
             name,
             gender,
             email,
             phone,
+            leave,
         })
             .then((response) => {
-                console.log(response);
+                console.log("employee successfully created");
                 this.props.history.push('/');
             })
             .catch((error) => {
-                console.log(error);
+
             });
+       
+        this.setState({name: '', email: '', phone: 0,gender:'',ID:0,leave:'No'})
     }
 
     render() {
         return (
             <main id="site-main">
-    <div class="conatiner">
-        <div class="box-nav d-flex justify-between">
-            <div  class="filter">
-                <a href="/" /*style="padding:80px;"*/><i class="fas fa-angle-double-left"></i>
-                    All Users
+    <div className="conatiner">
+        <div className="box-nav d-flex justify-between">
+            <div  className="filter">
+                <a href="/" /*style="padding:80px;"*/><i className="fas fa-angle-double-left"></i>
+                    Dashboard
                 </a>
             </div>
         </div>
 
-        <div class="form-title text-center">
-            <h2 class="text-dark">New User</h2>
-            <span class="text-light">Create new account</span>
+        <div className="form-title text-center">
+            <h2 className="text-dark">New User</h2>
+            <span className="text-light">Create new account</span>
         </div>
-        <form action="/api/users" id="add_user" method="post" autocomplete="off">
-    <div class="new_user">
-        <div class="form-group">
-            <label for="name" class="text-dark">Name</label>
-            <input type="text" name="name" value={this.state.name} placeholder="Enter Name"/>
+        <form id="add_user" autoComplete="off" onSubmit={this.handleSubmit}>
+    <div className="new_user">
+        <div className="form-group">
+            <label htmlFor="name" className="text-dark">Name</label>
+            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Enter Name"/>
             
         </div>
 
 
-        <div class="form-group">
-            <label for="Email" class="text-dark">Email</label>
+        <div className="form-group">
+            <label htmlFor="Email" className="text-dark">Email</label>
             
-            <input type="text" name="email" value={this.state.email} placeholder="Enter Email"/>
+            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} placeholder="Enter Email"/>
             
         </div>
 
-        <div class="form-group">
-            <label for="gender" class="radio-label">Gender</label>
-            <div class="radio inline">
-                <input type="radio" name="gender" id="gender-m" value={this.state.gender} />
-                <label for="gender-m" class="radio-label">Male</label>
+        <div className="form-group">
+            <label htmlFor="gender" className="radio-label">Gender</label>
+            <div className="radio inline">
+                <input type="radio" name="gender" id="gender-m" onChange={this.handleChange} value="Male" />
+                <label htmlFor="gender-m" className="radio-label">Male</label>
             </div>
-            <div class="radio inline">
-                <input type="radio" name="gender" id="gender-f" value={this.state.gender}/>
-                <label for="gender-f" class="radio-label">Female</label>
+            <div className="radio inline">
+                <input type="radio" name="gender" id="gender-f"  onChange={this.handleChange} value="Female"/>
+                <label htmlFor="gender-f" className="radio-label">Female</label>
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="phone" class="text-dark">Ph. No.</label>
-            <input type="tel" name="phone" pattern="[0-9]{10}" value ={this.state.phone}/>
+        <div className="form-group">
+            <label htmlFor="phone" className="text-dark">Ph. No.</label>
+            <input type="tel" name="phone" pattern="[0-9]{10}"onChange={this.handleChange} value ={this.state.phone}/>
             
         </div>
 
-        <div class="form-group">
-            <label for="ID" class="text-dark">ID &nbsp &nbsp &nbsp &nbsp</label>
-            <input type="number"class="text-dark" name="ID" value ={this.state.ID}/>
+        <div className="form-group">
+            <label htmlFor="ID" className="text-dark">ID</label>
+            <input type="number"className="text-dark" name="ID" onChange={this.handleChange} value ={this.state.ID}/>
             
         </div>
         <br/>
-        <div class="form-group">
-            <button type="submit" class="btn text-dark" ><b>Create</b></button>
+        <div className="form-group">
+            <button type="submit" className="btn text-dark" ><b>Create</b></button>
         </div>
        
     </div>
