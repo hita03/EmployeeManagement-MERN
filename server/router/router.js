@@ -23,7 +23,7 @@ router.route('/add-user').get(function (req, res) {
  *  @description for update user
  *  @method GET /update-user
  */
-router.get('/update-user', services.update_user);
+//router.get('/update-user', services.update_user);
 router.route('/list').get(function (req, res) {
     Employee.find((err, employee) => {
         if (err) {
@@ -58,51 +58,54 @@ router.route('/users').post(function (req, res) {
         });
 })
 
-router.route('/updateEmployee/:id').get(function (req, res) {
 
+router.post('/users', controller.create);
+router.get('/users', controller.find);
+router.put('/users/:id', controller.update);
+router.delete('/users/:id', controller.delete);
+module.exports = router;
+
+
+
+router.route('/users/:id').get(function (req, res) {
+    console.log("in /users/:id get req");
     let id = req.params.id;
     console.log(id);
     Employee.findById(id, function (err, employee) {
         res.json(employee);
     });
-})
+});
 
 
-router.route('/updateEmployee/:id').post(function (req, res) {
 
-    console.log(req.body);
-    Employee.findById(req.body.id, function (err, employee) {
+// To Update The Employee Details
+router.route('/users/:id').post(function (req, res) {
+    console.log("in /users/:id post req");
 
-        employee.name = req.body.name;
-        employee.gender = req.body.gender;
-        employee.email = req.body.email;
-        employee.phone = req.body.phone;
-        employee.leave = req.body.leave;
-        employee.ID = req.body.ID;
-
-        employee.save().then(emp => {
-            res.json('Employee Updated Successfully');
-        })
-            .catch(err => {
-                res.status(400).send("Unable To Update Employee");
-            });
+    Employee.findById(req.params.id, function (err, employee) {
+        if (!employee)
+            console.log("can't find user.");
+        //return next(new Error('Unable To Find Employee With This Id'));
+        else {
+            employee.name = req.body.name;
+            employee.gender = req.body.gender;
+            employee.email = req.body.email;
+            employee.phone = req.body.phone;
+            employee.leave = req.body.leave;
+            employee.ID = req.body.ID;
+            employee.save().then(emp => {
+                res.json('Employee Updated Successfully');
+            })
+                .catch(err => {
+                    res.status(400).send("Unable To Update Employee");
+                });
+        }
     });
-})
-router.post('/users', controller.create);
-router.get('/users', controller.find);
-router.put('/api/users/:id', controller.update);
-router.delete('/api/users/:id', controller.delete);
-module.exports = router;
+});
 
-
-// router.route('/').get(function (req, res) {
-//     Employee.find(function (err, employee) {
-//     if (err) {
-//     console.log(err);
-//     return err;
-//     }
-//     else {
-//      return res.json(employee);
-//     }
-//     });
-//     });
+router.route('/users/remove/:id').get(function (req, res) {
+    Employee.findByIdAndRemove({ _id: req.params.id }, function (err, employee) {
+    if (err) res.json(err);
+    else res.json('Employee Deleted Successfully');
+    });
+    });

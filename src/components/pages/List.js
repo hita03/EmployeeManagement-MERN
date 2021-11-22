@@ -3,6 +3,8 @@ import axios from 'axios';
 import Header from '../imports/Header';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+
 const CheckingLogin = () => {
 
     const user = useSelector(state => state.isLoggedIn);
@@ -36,7 +38,9 @@ class List extends React.Component {
             list: [],
             leave: 'No'
         }
+        this.deleteEmployee = this.deleteEmployee.bind(this);
     }
+
 
 
     componentDidMount = () => {
@@ -55,6 +59,23 @@ class List extends React.Component {
                 console.log('not retreived data')
             });
     }
+
+    deleteEmployee(id) {
+        //const history = useHistory();
+        axios.get('http://localhost:4000/api/users/remove/' + id)
+            .then(() => {
+
+                console.log('Employee Deleted !!!');
+                window.location.reload(true);
+                //history.push('/list');
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+
+
 
     render() {
         const { employees } = this.state;
@@ -81,7 +102,7 @@ class List extends React.Component {
                         <tbody>
                             {
                                 employees && employees.map((employee, i) => {
-                                    let updateProp =`/updateEmployee/?id=${employee._id}`;
+                                    let updateProp = `/update/${employee._id}`;
                                     let id = employee._id;
                                     return (
                                         <tr key={i}>
@@ -95,9 +116,9 @@ class List extends React.Component {
                                                 <a href={updateProp} className="btn border-shadow update" id={id}>
                                                     <span className="text-gradient"><i className="fas fa-pencil-alt" ></i></span>
                                                 </a>
-                                                <a className="btn border-shadow delete" data-id={employee.ID} >
+                                                <button onClick={() => this.deleteEmployee(employee._id)} className="btn border-shadow delete" >
                                                     <span className="text-gradient"><i className="fas fa-times" ></i></span>
-                                                </a>
+                                                </button>
                                             </td>
                                             <td>{employee.leave}</td>
                                         </tr>

@@ -147,7 +147,7 @@ exports.create = (req, res) => {
 
 exports.find = (req, res) => {
     console.log('hello user find')
-
+    
     if (req.query.id) {
         const id = req.query.id;
         Employee.findById(id)
@@ -175,6 +175,7 @@ exports.find = (req, res) => {
 
 //Update a new identified user by user id
 exports.update = (req, res) => {
+    console.log("in /users/:id put req");
     if (!req.body) {
         return res
             .status(400)

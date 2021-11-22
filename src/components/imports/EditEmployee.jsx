@@ -13,8 +13,10 @@ import axios from "axios";
 class EditEmployee extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-        id: this.props.match.params.id,
+     id: props.id,
+        //id: this.props.match.params.id,
       ID: 0,
       name: "",
       email: "",
@@ -26,6 +28,8 @@ class EditEmployee extends React.Component {
   }
 
   componentDidMount = () => {
+      console.log(this.state.id);
+      //console.log(this.props.match.params.id);
     this.getEmployeeById();
   };
 
@@ -34,7 +38,7 @@ class EditEmployee extends React.Component {
     axios
       .get(
         "http://localhost:4000/api/users/" +
-          this.state.id
+        this.state.id
       )
       .then((response) => {
         this.setState({
@@ -60,7 +64,8 @@ class EditEmployee extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { name,ID,leave,gender , email, phone } = this.state;
-    axios.post('http://localhost:4000/api/updateEmployee/' + this.state.id, {
+    axios.post('http://localhost:4000/api/users/' + this.state.id
+    , {
     name:name ,
     email: email,
     phone: phone,
@@ -77,6 +82,22 @@ class EditEmployee extends React.Component {
     console.log(error);
     });
     
+    }
+
+
+     checkMaleGender(){
+        if(this.state.gender==='Male'){
+            console.log("hello");
+            return true;
+        }  
+        else return false;      
+    }
+
+     checkFemaleGender(){
+        if(this.state.gender==='Female'){
+            return true;
+        }    
+        else return false;     
     }
   render() {
     return (
@@ -127,26 +148,45 @@ class EditEmployee extends React.Component {
                 <label htmlFor="gender" className="radio-label">
                   Gender
                 </label>
+                
                 <div className="radio inline">
-                  <input
+                    {this.checkMaleGender()? <input
                     type="radio"
                     name="gender"
-                    id="gender-m"
+                    id="gender-f"
                     onChange={this.handleChange}
-                    value="Male"
-                  />
-                  <label htmlFor="gender-m" className="radio-label">
-                    Male
-                  </label>
-                </div>
-                <div className="radio inline">
+                    value="Male" checked
+                  />:
                   <input
                     type="radio"
                     name="gender"
                     id="gender-f"
                     onChange={this.handleChange}
-                    value="Female"
+                    value="Male" 
                   />
+                   }
+                    
+                   
+                  <label htmlFor="gender-m" className="radio-label">
+                    Male
+                  </label>
+                </div>
+                <div className="radio inline">
+                {this.checkFemaleGender()? <input
+                    type="radio"
+                    name="gender"
+                    id="gender-f"
+                    onChange={this.handleChange}
+                    value="Female" checked
+                  />:
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="gender-f"
+                    onChange={this.handleChange}
+                    value="Female" 
+                  />
+                   }
                   <label htmlFor="gender-f" className="radio-label">
                     Female
                   </label>

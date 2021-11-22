@@ -16,7 +16,7 @@ function App() {
                   <Route path="/login" component={Login}></Route>
                   <Route path="/register" component={Register}></Route>
                   <Route exact path="/add-user" component={Create}></Route>
-                  <Route exact path="/updateEmployee/:id" component={Update}></Route>
+                  <Route exact path="/update/:id" render={(props) => <Update {...props}/>}></Route>
               </Switch>
           </BrowserRouter>
   );
