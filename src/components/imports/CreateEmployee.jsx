@@ -1,126 +1,217 @@
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
+import "./create.css";
+// import { Link } from "react-router-dom";
+import { useLocation, useHistory, Link } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
-// const customStyle = {
-//     width: '300px',
-//     margin: '0 auto'
-// }
 
-// const styleProp = {
-//     fontFamily: 'Lucida Sans, Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif'
-// }
 
 class CreateEmployee extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-                ID: 0,
-                name: '',
-                email: '',
-                gender: '',
-                phone: 0,
-                leave: 'No',
-                list:[],
-        }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      ID: 0,
+      name: "",
+      email: "",
+      gender: "",
+      phone: 0,
+      leave: "No",
+      list: [],
+    };
+  };
+   
+  // When value changes of the fields
+  handleChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
 
-    // When value changes of the fields
-    handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
-    }
+  // To add new employee when user submits the form
+  handleSubmit = (event) => {
+    
+    event.preventDefault();
+    const { ID, name, email, gender, phone, leave } = this.state;
+    console.log(ID, name, email, gender, phone, leave);
+    axios
+      .post("http://localhost:4000/api/users", {
+        ID,
+        name,
+        gender,
+        email,
+        phone,
+        leave,
+      })
+      .then((response) => {
+        console.log("employee successfully created");
+        // this.props.history.push("/");
+        // return <Redirect to='/list'/>
+      })
+      .catch((error) => {});
 
-    // To add new employee when user submits the form
-    handleSubmit = (event) => {
-        console.log("inside handle submit");
-        event.preventDefault();
-        const { ID, name, email,gender, phone,leave } = this.state;
-        console.log(ID, name, email, gender, phone, leave);
-        axios.post('http://localhost:4000/api/users', {
-            ID,
-            name,
-            gender,
-            email,
-            phone,
-            leave,
-        })
-            .then((response) => {
-                console.log("employee successfully created");
-                this.props.history.push('/');
-            })
-            .catch((error) => {
+    this.setState({
+      name: "",
+      email: "",
+      phone: 0,
+      gender: "",
+      ID: 0,
+      leave: "No",
+    });
+  };
 
-            });
-       
-        this.setState({name: '', email: '', phone: 0,gender:'',ID:0,leave:'No'})
-    }
+  reload =()=>{
+    this.props.history.push("/list");
+  }
 
-    render() {
-        return (
-            <main id="site-main">
-    <div className="conatiner">
-        <div className="box-nav d-flex justify-between">
-            <div  className="filter">
-                <a href="/" /*style="padding:80px;"*/><i className="fas fa-angle-double-left"></i>
-                    Dashboard
-                </a>
+  render() {
+    return (
+      <main id="site-main">
+        <div className="container">
+          <div className="box-nav d-flex justify-between">
+            <div className="filter">
+              <a href="/" /*style="padding:80px;"*/ className="dashboardStyle">
+                <i className="fas fa-angle-double-left"></i>
+                Dashboard
+              </a>
             </div>
-        </div>
+          </div>
+          <div className="box-nav d-flex justify-between">
+            <div className="filter">
+              <a href="/list" /*style="padding:80px;"*/ className="dashboardStyle">
+                <i className="fas fa-angle-double-left"></i>
+                View Employees
+              </a>
+            </div>
+          </div>
 
-        <div className="form-title text-center">
+          <div className="form-title text-center">
             <h2 className="text-dark">New User</h2>
-            <span className="text-light">Create new account</span>
-        </div>
-        <form id="add_user" autoComplete="off" onSubmit={this.handleSubmit}>
-    <div className="new_user">
-        <div className="form-group">
-            <label htmlFor="name" className="text-dark">Name</label>
-            <input type="text" name="name" value={this.state.name} onChange={this.handleChange} placeholder="Enter Name"/>
-            
-        </div>
+            <span className="text-dark">Create Account</span>
+          </div>
+          <form
+            id="add_user"
+            autoComplete="off"
+            onSubmit={this.handleSubmit}
+            className="p-5"
+          >
+            <div className="form-group row">
+              {/* <div className="form-group"> */}
+              <label htmlFor="name" className="col-sm-2 col-form-label">
+                Name
+              </label>
+              {/* <div className="mbsc-col-12 mbsc-col-md-6 mbsc-col-lg-3"> */}
 
-
-        <div className="form-group">
-            <label htmlFor="Email" className="text-dark">Email</label>
-            
-            <input type="text" name="email" value={this.state.email} onChange={this.handleChange} placeholder="Enter Email"/>
-            
-        </div>
-
-        <div className="form-group">
-            <label htmlFor="gender" className="radio-label">Gender</label>
-            <div className="radio inline">
-                <input type="radio" name="gender" id="gender-m" onChange={this.handleChange} value="Male" />
-                <label htmlFor="gender-m" className="radio-label">Male</label>
+              <div class="col-sm-10">
+                <input
+                  type="text"
+                  name="name"
+                  value={this.state.name}
+                  onChange={this.handleChange}
+                  placeholder="Enter Name"
+                  class="form-control"
+                />
+              </div>
             </div>
-            <div className="radio inline">
-                <input type="radio" name="gender" id="gender-f"  onChange={this.handleChange} value="Female"/>
-                <label htmlFor="gender-f" className="radio-label">Female</label>
+            <br />
+
+            <div className="form-group row">
+              <label htmlFor="Email" className="col-sm-2 col-form-label">
+                Email
+              </label>
+              <div class="col-sm-10">
+                <input
+                  class="form-control"
+                  type="text"
+                  name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                  placeholder="Enter Email"
+                />
+              </div>
             </div>
-        </div>
+            <br />
 
-        <div className="form-group">
-            <label htmlFor="phone" className="text-dark">Ph. No.</label>
-            <input type="tel" name="phone" pattern="[0-9]{10}"onChange={this.handleChange} value ={this.state.phone}/>
-            
-        </div>
+            <div className="form-group row">
+              <div className="col-sm-2 col-form-label">
+                <label htmlFor="gender" className="radio-label">
+                  Gender
+                </label>
+              </div>
 
-        <div className="form-group">
-            <label htmlFor="ID" className="text-dark">ID</label>
-            <input type="number"className="text-dark" name="ID" onChange={this.handleChange} value ={this.state.ID}/>
-            
-        </div>
-        <br/>
-        <div className="form-group">
-            <button type="submit" className="btn text-dark" ><b>Create</b></button>
-        </div>
-       
-    </div>
+              <div className="col-sm-10">
+                <input
+                  type="radio"
+                  name="gender"
+                  id="gender-m"
+                  onChange={this.handleChange}
+                  value="Male"
+                />
+                &nbsp;
+                <label htmlFor="gender-m" className="radio-label">
+                  Male
+                </label>
+                &nbsp;&nbsp;&nbsp;
+                <input
+                  type="radio"
+                  name="gender"
+                  id="gender-f"
+                  onChange={this.handleChange}
+                  value="Female"
+                />
+                &nbsp;
+                <label htmlFor="gender-f" className="radio-label">
+                  Female
+                </label>
+              </div>
 
-</form>
-    </div>
-</main>
-        );
-    }
+              <br />
+              <div className="form-group row">
+                <label htmlFor="phone" className="col-sm-2 col-form-label">
+                  Ph. No.
+                </label>
+                <div className="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="tel"
+                    name="phone"
+                    pattern="[0-9]{10}"
+                    onChange={this.handleChange}
+                    value={this.state.phone}
+                  />
+                </div>
+              </div>
+              <br />
+              <br />
+              <br />
+
+              <div className="form-group row">
+                <label htmlFor="ID" className="col-sm-2 col-form-label">
+                  ID
+                </label>
+                <div className="col-sm-10">
+                  <input
+                    class="form-control"
+                    type="number"
+                    className="text-dark"
+                    name="ID"
+                    onChange={this.handleChange}
+                    value={this.state.ID}
+                  />
+                </div>
+              </div>
+              <br />
+              <br />
+              {/* <div className="form-group"> */}
+              
+                <button type="submit" className="btn btn-primary text-light" >
+                  <b>Create</b>
+                </button>
+                
+            </div>
+          </form>
+        </div>
+      </main>
+    );
+  }
 }
 
 export default CreateEmployee;

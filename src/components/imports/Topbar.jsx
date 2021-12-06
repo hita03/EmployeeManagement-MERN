@@ -1,5 +1,6 @@
-import React from 'react'
-import "./topbar.css"
+import React from 'react';
+import { Link, Route} from 'react-router-dom';
+import "./topbar.css";
 // import {NotificationsSharpIcon} from '@mui/icons-material/NotificationsSharp';
 
 export default function Topbar() {
@@ -24,7 +25,10 @@ export default function Topbar() {
               {/* language logo */}
               <i className="fas fa-globe"></i>
             </div>
-            <img src="https://source.unsplash.com/random/?girl" alt="" className="topAvatar" />
+            <Link to='/profile'>
+            <img src="https://source.unsplash.com/random/?girl" alt="profile" className="topAvatar" />
+            </Link>
+            
           </div>
         </div>
       </div>

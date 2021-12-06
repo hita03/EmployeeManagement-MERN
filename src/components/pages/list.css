@@ -1,0 +1,25 @@
+.dashboardStyle{
+    font-size: 22px;
+    margin-left: 30px;
+    text-decoration: none;
+}
+
+.columnProp{
+    font-size: 20px;
+    font-weight: bold;
+}
+.tableProp{
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top:20px;
+}
+.tableBodyStyle{
+    font-size: 20px;
+}
+.editLink{
+    color: rgb(23, 189, 23);
+}
+
+.deleteLink{
+ color: red;
+}

@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
 
         // get user data
         const { email, password } = req.body
-
+        console.log(req.body)
         // validation
         if (!email || !password)
             return res.status(406).json({ err: "Not all fields have been entered" })
@@ -122,12 +122,7 @@ exports.create = (req, res) => {
     console.log("line 122");
     let employee = new Employee(
         req.body
-        // name: req.body.name,
-        // email: req.body.email,
-        // gender: req.body.gender,
-        // ID:  req.body.ID,
-        // phone:  req.body.phone,
-        // leave: req.body.leave,
+
 
     );
     console.log("line 133");

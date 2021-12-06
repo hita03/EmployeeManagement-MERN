@@ -1,7 +1,7 @@
 .topbar{
     width: 100%;
     height: 50px;
-    background-color: white;
+    /* background-color: white; */
     position: sticky;
     top: 0;
     z-index: 999;
@@ -20,6 +20,7 @@
     font-size: 30px;
     color: darkblue;
     cursor: pointer;
+    margin-left: 130px;
 }
 
 .topRight{

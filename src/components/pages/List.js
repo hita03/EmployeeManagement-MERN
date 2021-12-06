@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../imports/Header';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import './list.css';
 
 const CheckingLogin = () => {
 
@@ -86,49 +86,51 @@ class List extends React.Component {
 
                 </Header>
                 <main>
-                    <table responsive="true">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Gender</th>
-                                <th>ID</th>
-                                <th>Status</th>
-                                <th>On Leave</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                employees && employees.map((employee, i) => {
-                                    let updateProp = `/update/${employee._id}`;
-                                    let id = employee._id;
-                                    return (
-                                        <tr key={i}>
-                                            <td>{i + 1}</td>
-                                            <td>{employee.name}</td>
-                                            <td>{employee.email}</td>
-                                            <td>{employee.phone}</td>
-                                            <td>{employee.gender}</td>
-                                            <td>{employee.ID}</td>
-                                            <td>
-                                                <a href={updateProp} className="btn border-shadow update" id={id}>
-                                                    <span className="text-gradient"><i className="fas fa-pencil-alt" ></i></span>
-                                                </a>
-                                                <button onClick={() => this.deleteEmployee(employee._id)} className="btn border-shadow delete" >
-                                                    <span className="text-gradient"><i className="fas fa-times" ></i></span>
-                                                </button>
-                                            </td>
-                                            <td>{employee.leave}</td>
-                                        </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                    <a href="/" /*style="padding:80px;"*/><i className="fas fa-angle-double-left"></i>
-                        Dashboard
+                    <div className='tableProp'>
+                        <table responsive="true" class="table table-striped">
+                            <thead className='columnProp'>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col"> On Leave</th>
+                                </tr>
+                            </thead>
+                            <tbody className='tableBodyStyle'>
+                                {
+                                    employees && employees.map((employee, i) => {
+                                        let updateProp = `/update/${employee._id}`;
+                                        let id = employee._id;
+                                        return (
+                                            <tr key={i}>
+                                                <td>{i + 1}</td>
+                                                <td>{employee.name}</td>
+                                                <td>{employee.email}</td>
+                                                <td>{employee.phone}</td>
+                                                <td>{employee.gender}</td>
+                                                <td>{employee.ID}</td>
+                                                <td>
+                                                    <a href={updateProp} className="btn border-shadow update" id={id}>
+                                                        <span className='editLink'><i className="fas fa-pencil-alt" ></i></span>
+                                                    </a>
+                                                    <button onClick={() => this.deleteEmployee(employee._id)} className="btn border-shadow delete" >
+                                                        <span className='deleteLink'><i className="fas fa-times" ></i></span>
+                                                    </button>
+                                                </td>
+                                                <td>{employee.leave}</td>
+                                            </tr>
+                                        )
+                                    })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/" className='dashboardStyle'><i className="fas fa-angle-double-left"></i>
+                        &nbsp; Dashboard
                     </a>
                 </main>
             </>

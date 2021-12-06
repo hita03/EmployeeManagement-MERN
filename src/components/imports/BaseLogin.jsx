@@ -17,7 +17,7 @@ export default function BaseLogin() {
         <div className="col-sm-5 bg-img align-self-center">
             <div className="info">
                 <div className="logo clearfix">
-                    <Link className="nav-brand" to="/">Logo</Link>
+                    <Link className="nav-brand" to="/"></Link>
                 </div>
                 <div className="btn-section clearfix">
                     <button onClick={login} className={location.pathname === "/login" ? defaultClass + active : defaultClass}>Login</button>

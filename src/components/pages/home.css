@@ -1,6 +1,12 @@
 .home{
     flex: 4;
-    
-    /* background-color: darkblue; */
+    background-image: url(../../assets/bg-2.jpg);
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
+     
 }
+/* .container{
+    background-image: url(../../assets/bg-2.jpg);
+} */
 

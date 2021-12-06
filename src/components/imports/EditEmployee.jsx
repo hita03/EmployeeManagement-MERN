@@ -1,22 +1,13 @@
 import React from "react";
 import axios from "axios";
-
-// const customStyle = {
-//     width: '300px',
-//     margin: '0 auto'
-// }
-
-// const styleProp = {
-//     fontFamily: 'Lucida Sans, Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', 'sans-serif'
-// }
-
+import "./create.css";
 class EditEmployee extends React.Component {
   constructor(props) {
     super(props);
     console.log(props);
     this.state = {
-     id: props.id,
-        //id: this.props.match.params.id,
+      id: props.id,
+      //id: this.props.match.params.id,
       ID: 0,
       name: "",
       email: "",
@@ -28,18 +19,15 @@ class EditEmployee extends React.Component {
   }
 
   componentDidMount = () => {
-      console.log(this.state.id);
-      //console.log(this.props.match.params.id);
+    console.log(this.state.id);
+    //console.log(this.props.match.params.id);
     this.getEmployeeById();
   };
 
   // To get employee based on ID
   getEmployeeById() {
     axios
-      .get(
-        "http://localhost:4000/api/users/" +
-        this.state.id
-      )
+      .get("http://localhost:4000/api/users/" + this.state.id)
       .then((response) => {
         this.setState({
           name: response.data.name,
@@ -60,52 +48,47 @@ class EditEmployee extends React.Component {
   };
   // When value changes of the fields
 
-
   handleSubmit = (event) => {
     event.preventDefault();
-    const { name,ID,leave,gender , email, phone } = this.state;
-    axios.post('http://localhost:4000/api/users/' + this.state.id
-    , {
-    name:name ,
-    email: email,
-    phone: phone,
-    gender: gender,
-    ID:ID,
-    leave: leave,
+    const { name, ID, leave, gender, email, phone } = this.state;
+    axios
+      .post("http://localhost:4000/api/users/" + this.state.id, {
+        name: name,
+        email: email,
+        phone: phone,
+        gender: gender,
+        ID: ID,
+        leave: leave,
+      })
+      .then((response) => {
+        console.log(response);
+        this.props.history.push("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    })
-    .then((response) => {
-    console.log(response);
-    this.props.history.push('/');
-    })
-    .catch((error) => {
-    console.log(error);
-    });
-    
-    }
+  checkMaleGender() {
+    if (this.state.gender === "Male") {
+      console.log("hello");
+      return true;
+    } else return false;
+  }
 
-
-     checkMaleGender(){
-        if(this.state.gender==='Male'){
-            console.log("hello");
-            return true;
-        }  
-        else return false;      
-    }
-
-     checkFemaleGender(){
-        if(this.state.gender==='Female'){
-            return true;
-        }    
-        else return false;     
-    }
+  checkFemaleGender() {
+    if (this.state.gender === "Female") {
+      return true;
+    } else return false;
+  }
   render() {
     return (
       <main id="site-main">
-        <div className="conatiner">
+
+        <div className="container">
           <div className="box-nav d-flex justify-between">
             <div className="filter">
-              <a href="/" /*style="padding:80px;"*/>
+              <a href="/" className="dashboardStyle">
                 <i className="fas fa-angle-double-left"></i>
                 Dashboard
               </a>
@@ -115,12 +98,18 @@ class EditEmployee extends React.Component {
           <div className="form-title text-center">
             <h2 className="text-dark">Edit Employee</h2>
           </div>
-          <form id="update_user" autoComplete="off" onSubmit={this.handleSubmit}>
-            <div className="new_user">
-              <div className="form-group">
-                <label htmlFor="name" className="text-dark">
-                  Name
-                </label>
+          <form
+            id="update_user"
+            autoComplete="off"
+            onSubmit={this.handleSubmit}
+            className="p-5"
+          >
+            {/* <div className="new_user"> */}
+            <div className="form-group row">
+              <label htmlFor="name" className="col-sm-2 col-form-label">
+                Name
+              </label>
+              <div className="col-sm-10">
                 <input
                   type="text"
                   name="name"
@@ -129,12 +118,13 @@ class EditEmployee extends React.Component {
                   placeholder="Enter Name"
                 />
               </div>
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="Email" className="text-dark">
-                  Email
-                </label>
-
+            <div className="form-group row">
+              <label htmlFor="Email" className="col-sm-2 col-form-label">
+                Email
+              </label>
+              <div className="col-sm-10">
                 <input
                   type="text"
                   name="email"
@@ -143,60 +133,70 @@ class EditEmployee extends React.Component {
                   placeholder="Enter Email"
                 />
               </div>
+            </div>
 
-              <div className="form-group">
+            <div className="form-group row">
+              <div className="col-sm-2 col-form-label">
                 <label htmlFor="gender" className="radio-label">
                   Gender
                 </label>
-                
-                <div className="radio inline">
-                    {this.checkMaleGender()? <input
-                    type="radio"
-                    name="gender"
-                    id="gender-f"
-                    onChange={this.handleChange}
-                    value="Male" checked
-                  />:
-                  <input
-                    type="radio"
-                    name="gender"
-                    id="gender-f"
-                    onChange={this.handleChange}
-                    value="Male" 
-                  />
-                   }
-                    
-                   
-                  <label htmlFor="gender-m" className="radio-label">
-                    Male
-                  </label>
-                </div>
-                <div className="radio inline">
-                {this.checkFemaleGender()? <input
-                    type="radio"
-                    name="gender"
-                    id="gender-f"
-                    onChange={this.handleChange}
-                    value="Female" checked
-                  />:
-                  <input
-                    type="radio"
-                    name="gender"
-                    id="gender-f"
-                    onChange={this.handleChange}
-                    value="Female" 
-                  />
-                   }
-                  <label htmlFor="gender-f" className="radio-label">
-                    Female
-                  </label>
-                </div>
               </div>
 
-              <div className="form-group">
-                <label htmlFor="phone" className="text-dark">
-                  Ph. No.
+              <div className="col-sm-10">
+                {this.checkMaleGender() ? (
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="gender-f"
+                    onChange={this.handleChange}
+                    value="Male"
+                    checked
+                  />
+                ) : (
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="gender-f"
+                    onChange={this.handleChange}
+                    value="Male"
+                  />
+                )}
+                &nbsp;
+                <label htmlFor="gender-m" className="radio-label">
+                  Male
                 </label>
+                &nbsp;&nbsp;&nbsp;
+              </div>
+              <div className="col-sm-10">
+                {this.checkFemaleGender() ? (
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="gender-f"
+                    onChange={this.handleChange}
+                    value="Female"
+                    checked
+                  />
+                ) : (
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="gender-f"
+                    onChange={this.handleChange}
+                    value="Female"
+                  />
+                )}
+                <label htmlFor="gender-f" className="radio-label">
+                  Female
+                </label>
+              </div>
+            </div>
+
+            <div className="form-group row">
+              <label htmlFor="phone" className="col-sm-2 col-form-label">
+                Ph. No.
+              </label>
+              <div className="col-sm-10">
                 <input
                   type="tel"
                   name="phone"
@@ -205,11 +205,13 @@ class EditEmployee extends React.Component {
                   value={this.state.phone}
                 />
               </div>
+            </div>
 
-              <div className="form-group">
-                <label htmlFor="ID" className="text-dark">
-                  ID
-                </label>
+            <div className="form-group row">
+              <label htmlFor="ID" className="col-sm-2 col-form-label">
+                ID
+              </label>
+              <div className="col-sm-10">
                 <input
                   type="number"
                   className="text-dark"
@@ -218,13 +220,15 @@ class EditEmployee extends React.Component {
                   value={this.state.ID}
                 />
               </div>
-              <br />
-              <div className="form-group">
-                <button type="submit" className="btn text-dark">
-                  <b>Save</b>
-                </button>
-              </div>
             </div>
+            <br />
+
+            <div className="form-group row">
+              <button type="submit" className="btn btn-primary text-light">
+                <b>Save</b>
+              </button>
+            </div>
+            {/* </div> */}
           </form>
         </div>
       </main>

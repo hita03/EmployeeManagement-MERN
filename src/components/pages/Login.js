@@ -27,12 +27,17 @@ export default function Login() {
         // const userdata = { email: "dmin@gmail.com", password : "admin123"}
         const login = dispatch(loginAction(userCredential))
         login
-            .then(data => history.push('/'))
+            .then((data) =>{ 
+                console.log(data);
+                history.push('/');
+        
+        })
             .catch(error => setError(error.err))
 
         // console.log(store.getState())
         // console.log(userCredential);
     }
+   
 
     return (
         <div id="login">
@@ -40,6 +45,7 @@ export default function Login() {
                 <div className="row login-box">
                     <BaseLogin />
                     <LoginForm loginState={{handleSubmit, setEmail, setPassword, errorMessage, setError}} />
+                    
                 </div>
             </div>
       </div>

@@ -6,7 +6,10 @@
     align-items: center;
     @extend .position-relative;
     @extend .text-center;
-
+    background-image: url('../assets/bg-2.jpg');
+    background-size: cover;
+    background-position:center;
+    background-repeat: no-repeat;
     .default-bg{
         @extend .background;
         color: #505050;
@@ -17,11 +20,13 @@
         margin: 0 auto;
         box-shadow: 0 0 35px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
+        background-color:#fff;
 
         > .bg-img{
             padding: 0;
             border-radius: 10px 0 0 10px;
-            background: rgba(0, 0,0, 0.04) url(http://localhost:3000/static/media/bg_img.0b3c570c.jpg) top left repeat;
+            //background: rgba(0, 0,0, 0.04) url(http://localhost:3000/static/media/bg_img.0b3c570c.jpg) top left repeat;
+            background-image: url("../assets/bg_img.jpg");
             background-size: cover;
             top:0;
             bottom: 0;
@@ -29,6 +34,7 @@
         }
 
         .info{
+            
             height: 450px;
             position: relative;
 

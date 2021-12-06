@@ -8,34 +8,21 @@ import List from './List';
 import Create from './Create';
 import "./home.css";
 // import image from './Images/1.jpg'
-
+import Header from '../imports/Header.jsx';
 export default function Home() {
-    console.log("in home")
     return (
         <div className="home">
+            <Header/>
             <div className="homeWidgets">
-                <WidgetSm />
-                <WidgetLg />
-            </div>
-            <Router>
+           
+            </div >
+            {/* <div className="container"> */}
                 <Topbar />
 
-                <div div className="container">
+                <div className="container">
                     <Sidebar />
-                    <Switch>
-                        <Route exact path="/list">
-                            <List />
-                        </Route>
-                        <Route exact path="/add-user">
-                            <Create />
-                        </Route>
-
-                    </Switch>
                 </div>
-            </Router>
-
-
-
+                {/* </div> */}
         </div>
     )
 }
