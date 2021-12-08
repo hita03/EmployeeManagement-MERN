@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import "./create.css";
-// import { Link } from "react-router-dom";
 import { useLocation, useHistory, Link } from 'react-router-dom';
 import { Redirect } from "react-router-dom";
 
@@ -43,8 +42,6 @@ class CreateEmployee extends React.Component {
       })
       .then((response) => {
         console.log("employee successfully created");
-        // this.props.history.push("/");
-        // return <Redirect to='/list'/>
       })
       .catch((error) => {});
 
@@ -68,7 +65,7 @@ class CreateEmployee extends React.Component {
         <div className="container">
           <div className="box-nav d-flex justify-between">
             <div className="filter">
-              <a href="/" /*style="padding:80px;"*/ className="dashboardStyle">
+              <a href="/" className="dashboardStyle">
                 <i className="fas fa-angle-double-left"></i>
                 Dashboard
               </a>
@@ -76,7 +73,7 @@ class CreateEmployee extends React.Component {
           </div>
           <div className="box-nav d-flex justify-between">
             <div className="filter">
-              <a href="/list" /*style="padding:80px;"*/ className="dashboardStyle">
+              <a href="/list" className="dashboardStyle">
                 <i className="fas fa-angle-double-left"></i>
                 View Employees
               </a>
@@ -94,11 +91,9 @@ class CreateEmployee extends React.Component {
             className="p-5"
           >
             <div className="form-group row">
-              {/* <div className="form-group"> */}
               <label htmlFor="name" className="col-sm-2 col-form-label">
                 Name
               </label>
-              {/* <div className="mbsc-col-12 mbsc-col-md-6 mbsc-col-lg-3"> */}
 
               <div class="col-sm-10">
                 <input
@@ -200,7 +195,6 @@ class CreateEmployee extends React.Component {
               </div>
               <br />
               <br />
-              {/* <div className="form-group"> */}
               
                 <button type="submit" className="btn btn-primary text-light" >
                   <b>Create</b>

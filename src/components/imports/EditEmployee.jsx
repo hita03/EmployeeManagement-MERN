@@ -7,7 +7,6 @@ class EditEmployee extends React.Component {
     console.log(props);
     this.state = {
       id: props.id,
-      //id: this.props.match.params.id,
       ID: 0,
       name: "",
       email: "",
@@ -20,7 +19,6 @@ class EditEmployee extends React.Component {
 
   componentDidMount = () => {
     console.log(this.state.id);
-    //console.log(this.props.match.params.id);
     this.getEmployeeById();
   };
 
@@ -104,7 +102,6 @@ class EditEmployee extends React.Component {
             onSubmit={this.handleSubmit}
             className="p-5"
           >
-            {/* <div className="new_user"> */}
             <div className="form-group row">
               <label htmlFor="name" className="col-sm-2 col-form-label">
                 Name
@@ -228,7 +225,6 @@ class EditEmployee extends React.Component {
                 <b>Save</b>
               </button>
             </div>
-            {/* </div> */}
           </form>
         </div>
       </main>
