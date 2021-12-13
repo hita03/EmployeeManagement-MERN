@@ -56,25 +56,6 @@ export default function Sidebar() {
             </li>
           </ul>
         </div>
-
-        {/* <div className="sidebarMenu">
-          <h3 className="sidebarTitle">Notifications</h3>
-          <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <i className="fas fa-envelope"></i>
-              Mail
-            </li>
-            <li className="sidebarListItem">
-              <i className="fas fa-comment-dots"></i>
-              Feedback
-            </li>
-            <li className="sidebarListItem">
-              <i className="fas fa-pen"></i>
-              Messages
-            </li>
-          </ul>
-        </div> */}
-
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Contact</h3>
 

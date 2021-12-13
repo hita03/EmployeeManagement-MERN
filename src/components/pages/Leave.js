@@ -95,7 +95,6 @@ class Leave extends React.Component {
 
     render() {
         const { employees } = this.state;
-        //style="color: #4CAF50;" style="color: red;"
         return (
             <>
                 <Header>
@@ -135,7 +134,7 @@ class Leave extends React.Component {
                         </tbody>
                     </table>
                     </div>
-                    <a href="/" className='dashboardStyle'/*style="padding:80px;"*/><i className="fas fa-angle-double-left"></i>
+                    <a href="/" className='dashboardStyle'><i className="fas fa-angle-double-left"></i>
                         Dashboard
                     </a>
                 </main>

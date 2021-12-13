@@ -24,7 +24,6 @@ export default function Login() {
             email,
             password
         }
-        // const userdata = { email: "dmin@gmail.com", password : "admin123"}
         const login = dispatch(loginAction(userCredential))
         login
             .then((data) =>{ 
@@ -33,9 +32,6 @@ export default function Login() {
         
         })
             .catch(error => setError(error.err))
-
-        // console.log(store.getState())
-        // console.log(userCredential);
     }
    
 

@@ -61,13 +61,11 @@ class List extends React.Component {
     }
 
     deleteEmployee(id) {
-        //const history = useHistory();
         axios.get('http://localhost:4000/api/users/remove/' + id)
             .then(() => {
 
                 console.log('Employee Deleted !!!');
                 window.location.reload(true);
-                //history.push('/list');
             })
             .catch((error) => {
                 console.log(error)
@@ -79,7 +77,6 @@ class List extends React.Component {
 
     render() {
         const { employees } = this.state;
-        //style="color: #4CAF50;" style="color: red;"
         return (
             <>
                 <Header>
