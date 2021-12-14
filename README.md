@@ -1,6 +1,8 @@
 # Employee Management - MERN Stack
 ### This project is a web application that facilitates authentication, leave requests, CRUD operations for employees for a particular small/medium organization, handled by an authoritative HR role in the same organization.
 
+Additional modules used: axios, bcrypt, cors, dotenv, jsonwebtoken, mongoose
+
 ## Setup project
 1. Clone this project and install all the dependancies using the `npm i` or `npm install` command.
 2. Create a config.env file in the root directory and specify PORT, MONGO_URI and JWT_TOKEN. <br/>
