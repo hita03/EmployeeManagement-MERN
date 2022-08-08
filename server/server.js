@@ -4,12 +4,16 @@ const cors = require('cors');
 
 require('dotenv').config({ path: "./config.env"});
 const PORT = process.env.PORT || 4000 ;
-console.log(PORT);
 
 // create express instance
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+app.use(cors({
+    origin:"*",
+    // Change origin to client URL on Production
+    methods:['GET','POST','UPDATE','DELETE','PUT']
+}))
 
 // database connectionP
 connect();
